@@ -1,0 +1,25 @@
+{
+  "name": "senior-nodejs",
+  "version": "1.0.0",
+  "description": "Node.JS Senior",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cooldaynow/senior-nodejs.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cooldaynow/senior-nodejs/issues"
+  },
+  "homepage": "https://github.com/cooldaynow/senior-nodejs#readme",
+  "devDependencies": {
+    "@types/node": "^22.13.4",
+    "prettier": "^3.5.1",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.3"
+  }
+}
