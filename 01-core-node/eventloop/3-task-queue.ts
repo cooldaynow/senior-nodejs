@@ -7,7 +7,7 @@ const createTask = (callback: Cb, delay: number) => ({ callback, time: Date.now(
 const setTask = (cb: Cb, delay: number) => queue.set(createTask(cb, delay), true);
 
 /* Обработка тасок */
-function runLoopV2(queue: Map<Task, boolean>) {
+function runLoop(queue: Map<Task, boolean>) {
   let nextTaskTime: number = Infinity;
   queue.forEach((_, task) => {
     if (isReadyTask(task)) {
@@ -20,15 +20,15 @@ function runLoopV2(queue: Map<Task, boolean>) {
   });
 
   if (queue.size) {
-    /* Считаем delay до следующей задачи и запускаем таймер с небольшим перекрытием */
+    /* Считаем delay до следующей задачи и запускаем таймер */
     const delay = nextTaskTime - Date.now();
-    setTimeout(() => runLoopV2(queue), Math.max(delay, 0));
+    setTimeout(() => runLoop(queue), Math.max(delay, 0));
   }
 }
 
 /* Назначаем таски */
-setTask(() => console.log('Task 1 done'), 3);
-setTask(() => console.log('Task 2 done'), 5);
-setTask(() => console.log('Task 3 done'), 7);
+setTask(() => console.log('Task 1 done'), 1000);
+setTask(() => console.log('Task 2 done'), 0);
+setTask(() => console.log('Task 3 done'), 100);
 
-runLoopV2(queue);
+runLoop(queue);
