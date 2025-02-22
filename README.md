@@ -4,29 +4,29 @@
 
 ### **1.1. Event Loop, асинхронность и внутренности Node.js**
 
-- [ ] **V8 и интерпретация кода**
+- [x] **V8 и интерпретация кода**
 
-    - [ ] Понимание: AST (Abstract Syntax Tree), JIT-компиляторы (Ignition, TurboFan), оптимизации.
-    - [ ] Как JS-код превращается в машинный, что даёт возможность повышать производительность.
+  - [x] Понимание: AST (Abstract Syntax Tree), JIT-компиляторы (Ignition, TurboFan), оптимизации.
+  - [x] Как JS-код превращается в машинный, что даёт возможность повышать производительность.
 
 - [ ] **Garbage Collector в V8**
 
-    - [ ] Типы GC: Mark-and-Sweep, Incremental, Generational, Concurrent.
-    - [ ] “Стоп-мир” (Stop-the-world) фазы, утечки памяти в Node.js и способы их выявить (heapdump, DevTools).
+  - [ ] Типы GC: Mark-and-Sweep, Incremental, Generational, Concurrent.
+  - [ ] “Стоп-мир” (Stop-the-world) фазы, утечки памяти в Node.js и способы их выявить (heapdump, DevTools).
 
 - [ ] **Libuv и управление потоками**
 
-    - [ ] Асинхронные I/O операции, Thread Pool для I/O-bound задач.
-    - [ ] Ограничения при CPU-bound нагрузках.
+  - [ ] Асинхронные I/O операции, Thread Pool для I/O-bound задач.
+  - [ ] Ограничения при CPU-bound нагрузках.
 
 - [x] **Фазы Event Loop**
 
-    - [x] Timers, I/O Callbacks, Idle/Prepare, Poll, Check, Close.
-    - [x] Разница между `setTimeout`, `setImmediate`, `process.nextTick`.
+  - [x] Timers, I/O Callbacks, Idle/Prepare, Poll, Check, Close.
+  - [x] Разница между `setTimeout`, `setImmediate`, `process.nextTick`.
 
 - [ ] **Worker Threads**
-    - [ ] Полноценная многопоточность в Node.js, отличие от Thread Pool libuv.
-    - [ ] Передача данных между Worker’ами.
+  - [ ] Полноценная многопоточность в Node.js, отличие от Thread Pool libuv.
+  - [ ] Передача данных между Worker’ами.
 
 > **Задача**:
 >
@@ -39,14 +39,14 @@
 
 - [ ] **CommonJS vs ES Modules**
 
-    - [ ] `require` vs `import`, плюсы/минусы, когда использовать ESM.
+  - [ ] `require` vs `import`, плюсы/минусы, когда использовать ESM.
 
 - [ ] **Кэширование модулей**
 
-    - [ ] Как работает `require()`, единый инстанс модуля, ручной сброс кэша.
+  - [ ] Как работает `require()`, единый инстанс модуля, ручной сброс кэша.
 
 - [ ] **Динамический импорт**
-    - [ ] `import()` для lazy loading и плагинов.
+  - [ ] `import()` для lazy loading и плагинов.
 
 > **Задача**:
 >
@@ -59,16 +59,16 @@
 
 - [ ] **Концепция потоков**
 
-    - [ ] Зачем нужны Streams, экономия памяти при обработке больших файлов.
+  - [ ] Зачем нужны Streams, экономия памяти при обработке больших файлов.
 
 - [ ] **Типы потоков**
 
-    - [ ] Readable (чтение), Writable (запись), Duplex (двунаправленный), Transform (преобразование).
-    - [ ] Применение: чтение/запись файлов, HTTP-запросы, TCP-соединения, шифрование и сжатие “на лету”.
+  - [ ] Readable (чтение), Writable (запись), Duplex (двунаправленный), Transform (преобразование).
+  - [ ] Применение: чтение/запись файлов, HTTP-запросы, TCP-соединения, шифрование и сжатие “на лету”.
 
 - [ ] **Pipe и Backpressure**
-    - [ ] `.pipe()` для подключения потоков друг к другу.
-    - [ ] Решение проблемы Backpressure (управление скоростью чтения/записи).
+  - [ ] `.pipe()` для подключения потоков друг к другу.
+  - [ ] Решение проблемы Backpressure (управление скоростью чтения/записи).
 
 > **Задача**:
 >
@@ -81,16 +81,16 @@
 
 - [ ] **Основы промисов**
 
-    - [ ] `Promise.resolve`, `Promise.reject`, `Promise.all`, `Promise.race`, `Promise.any`.
-    - [ ] Цепочки `.then`, `.catch`, `.finally`.
+  - [ ] `Promise.resolve`, `Promise.reject`, `Promise.all`, `Promise.race`, `Promise.any`.
+  - [ ] Цепочки `.then`, `.catch`, `.finally`.
 
 - [ ] **Async/Await**
 
-    - [ ] Упрощение работы с асинхронностью, `try/catch` и `.catch()`, глобальные `unhandledRejection`.
+  - [ ] Упрощение работы с асинхронностью, `try/catch` и `.catch()`, глобальные `unhandledRejection`.
 
 - [ ] **Проблемы и ограничения**
-    - [ ] Почему промисы нельзя «отменять», когда лучше Worker Threads.
-    - [ ] Организация тайм-аутов для промисов.
+  - [ ] Почему промисы нельзя «отменять», когда лучше Worker Threads.
+  - [ ] Организация тайм-аутов для промисов.
 
 > **Задача**:
 >
@@ -105,18 +105,18 @@
 
 - [ ] **Зачем TypeScript**
 
-    - [ ] Типобезопасность, автодополнение, упрощение рефакторинга.
+  - [ ] Типобезопасность, автодополнение, упрощение рефакторинга.
 
 - [ ] **Основы**
 
-    - [ ] Интерфейсы, типы (type), generics, enum.
+  - [ ] Интерфейсы, типы (type), generics, enum.
 
 - [ ] **Продвинутая типизация**
 
-    - [ ] Conditional Types, Utility Types (Partial, Pick, Omit, Required), Mapped Types.
+  - [ ] Conditional Types, Utility Types (Partial, Pick, Omit, Required), Mapped Types.
 
 - [ ] **Интеграция**
-    - [ ] Настройка `tsconfig.json`, декларирование типов (DefinitelyTyped), синхронизация с Node.js API.
+  - [ ] Настройка `tsconfig.json`, декларирование типов (DefinitelyTyped), синхронизация с Node.js API.
 
 > **Задача**:
 >
@@ -129,14 +129,14 @@
 
 - [ ] **async_hooks**
 
-    - [ ] Отслеживание цикла жизни асинхронных ресурсов, создание контекста запросов.
+  - [ ] Отслеживание цикла жизни асинхронных ресурсов, создание контекста запросов.
 
 - [ ] **perf_hooks**
 
-    - [ ] Замеры производительности, время ответа, метрики.
+  - [ ] Замеры производительности, время ответа, метрики.
 
 - [ ] **Дополнительные инструменты профилирования**
-    - [ ] `clinic.js` (Doctor, Flame, Bubbleprof), `0x` для flamegraphs, Chrome DevTools.
+  - [ ] `clinic.js` (Doctor, Flame, Bubbleprof), `0x` для flamegraphs, Chrome DevTools.
 
 > **Задача**:
 >
@@ -154,16 +154,16 @@
 
 - [ ] **Проектирование REST API**
 
-    - [ ] Принципы REST, уровни зрелости (Richardson Maturity Model).
-    - [ ] Версионирование API (v1, v2).
+  - [ ] Принципы REST, уровни зрелости (Richardson Maturity Model).
+  - [ ] Версионирование API (v1, v2).
 
 - [ ] **Оптимизация запросов**
 
-    - [ ] HTTP/2 (мультиплексирование, сжатие заголовков).
-    - [ ] Кэширование (ETag, Last-Modified, Cache-Control).
+  - [ ] HTTP/2 (мультиплексирование, сжатие заголовков).
+  - [ ] Кэширование (ETag, Last-Modified, Cache-Control).
 
 - [ ] **Rate Limiting и защита от DDoS**
-    - [ ] `express-rate-limit`, Redis, NGINX.
+  - [ ] `express-rate-limit`, Redis, NGINX.
 
 > **Задача**:
 >
@@ -177,12 +177,12 @@
 
 - [ ] **Основы GraphQL**
 
-    - [ ] Query, Mutation, Subscription.
-    - [ ] Сравнение с REST (гибкость, сокращение «прогонов»).
+  - [ ] Query, Mutation, Subscription.
+  - [ ] Сравнение с REST (гибкость, сокращение «прогонов»).
 
 - [ ] **Оптимизация**
-    - [ ] Избежание N+1 с помощью DataLoader.
-    - [ ] Persisted Queries.
+  - [ ] Избежание N+1 с помощью DataLoader.
+  - [ ] Persisted Queries.
 
 > **Задача**:
 >
@@ -195,11 +195,11 @@
 
 - [ ] **WebSockets**
 
-    - [ ] Полнодуплексная связь, `ws`, `socket.io`.
-    - [ ] Реализация чата или коллаборативного приложения.
+  - [ ] Полнодуплексная связь, `ws`, `socket.io`.
+  - [ ] Реализация чата или коллаборативного приложения.
 
 - [ ] **Server-Sent Events (SSE)**
-    - [ ] Односторонний стрим данных от сервера к клиенту.
+  - [ ] Односторонний стрим данных от сервера к клиенту.
 
 > **Задача**:
 >
@@ -212,14 +212,14 @@
 
 - [ ] **Монолит vs Микросервисы**
 
-    - [ ] Когда микросервисы оправданы, основные паттерны (API Gateway, Service Discovery).
+  - [ ] Когда микросервисы оправданы, основные паттерны (API Gateway, Service Discovery).
 
 - [ ] **Взаимодействие микросервисов**
 
-    - [ ] Синхронное (REST, gRPC), асинхронное (Pub/Sub через Kafka, NATS, RabbitMQ).
+  - [ ] Синхронное (REST, gRPC), асинхронное (Pub/Sub через Kafka, NATS, RabbitMQ).
 
 - [ ] **Построение**
-    - [ ] API Gateway для входящих запросов, а сзади несколько сервисов.
+  - [ ] API Gateway для входящих запросов, а сзади несколько сервисов.
 
 > **Задача**:
 >
@@ -232,16 +232,16 @@
 
 - [ ] **Тестирование**
 
-    - [ ] Модульные тесты (Jest/Mocha), интеграционные (Supertest), Mocking (Sinon).
-    - [ ] Целевые показатели coverage (80%+).
+  - [ ] Модульные тесты (Jest/Mocha), интеграционные (Supertest), Mocking (Sinon).
+  - [ ] Целевые показатели coverage (80%+).
 
 - [ ] **CI/CD**
 
-    - [ ] GitHub Actions, GitLab CI, Jenkins: автоматический прогон тестов, линтинга, сборки.
-    - [ ] CD: деплой по пушу в main, откат при ошибках.
+  - [ ] GitHub Actions, GitLab CI, Jenkins: автоматический прогон тестов, линтинга, сборки.
+  - [ ] CD: деплой по пушу в main, откат при ошибках.
 
 - [ ] **Обсервабилити**
-    - [ ] Логирование (Winston, Pino), мониторинг (Prometheus, Grafana), трассировка (Jaeger, Zipkin).
+  - [ ] Логирование (Winston, Pino), мониторинг (Prometheus, Grafana), трассировка (Jaeger, Zipkin).
 
 > **Задача**:
 >
@@ -255,19 +255,19 @@
 
 - [ ] **Docker**
 
-    - [ ] Создание Dockerfile: multi-stage build, оптимизация образов.
-    - [ ] `docker-compose`: локальное окружение (Node + Redis + БД).
-    - [ ] Регистри (Docker Hub, GHCR).
+  - [ ] Создание Dockerfile: multi-stage build, оптимизация образов.
+  - [ ] `docker-compose`: локальное окружение (Node + Redis + БД).
+  - [ ] Регистри (Docker Hub, GHCR).
 
 - [ ] **Kubernetes**
 
-    - [ ] Основные объекты: Pod, Deployment, Service, Ingress, ConfigMap, Secret.
-    - [ ] Масштабирование: HPA (Horizontal Pod Autoscaler), Rolling Update.
-    - [ ] Helm Charts: упаковка манифестов, templating, values.
+  - [ ] Основные объекты: Pod, Deployment, Service, Ingress, ConfigMap, Secret.
+  - [ ] Масштабирование: HPA (Horizontal Pod Autoscaler), Rolling Update.
+  - [ ] Helm Charts: упаковка манифестов, templating, values.
 
 - [ ] **DevOps-практики**
-    - [ ] GitOps (ArgoCD, Flux), Terraform/Pulumi для IaC.
-    - [ ] CI/CD в контексте K8s: авторазвёртывание, управление конфигурациями.
+  - [ ] GitOps (ArgoCD, Flux), Terraform/Pulumi для IaC.
+  - [ ] CI/CD в контексте K8s: авторазвёртывание, управление конфигурациями.
 
 > **Задача**:
 >
@@ -281,15 +281,15 @@
 
 - [ ] **Основные принципы DDD**
 
-    - [ ] Ubiquitous Language, Bounded Context, Entities, Value Objects, Repositories.
-    - [ ] Контейнеризация доменной логики, стратегические/тактические паттерны.
+  - [ ] Ubiquitous Language, Bounded Context, Entities, Value Objects, Repositories.
+  - [ ] Контейнеризация доменной логики, стратегические/тактические паттерны.
 
 - [ ] **CQRS + Event Sourcing** (при желании)
 
-    - [ ] Разделение операций на чтение/запись, хранение событий вместо состояний.
+  - [ ] Разделение операций на чтение/запись, хранение событий вместо состояний.
 
 - [ ] **Design Patterns**
-    - [ ] (Factory, Adapter, Strategy, Observer, Decorator, Proxy) и их применение в Node.js.
+  - [ ] (Factory, Adapter, Strategy, Observer, Decorator, Proxy) и их применение в Node.js.
 
 > **Задача**:
 >
@@ -304,10 +304,10 @@
 
 - [ ] **JWT, OAuth2, OpenID Connect**
 
-    - [ ] Хранение и ротация токенов, refresh-токены, blacklist.
+  - [ ] Хранение и ротация токенов, refresh-токены, blacklist.
 
 - [ ] **Роли и права**
-    - [ ] RBAC (Role-Based Access Control) vs ABAC (Attribute-Based).
+  - [ ] RBAC (Role-Based Access Control) vs ABAC (Attribute-Based).
 
 > **Задача**:
 >
@@ -320,15 +320,15 @@
 
 - [ ] **SQL-инъекции, XSS, CSRF**
 
-    - [ ] Использование ORM (sequelize, typeorm, knex) или параметризованных запросов.
-    - [ ] Helmet, csurf.
+  - [ ] Использование ORM (sequelize, typeorm, knex) или параметризованных запросов.
+  - [ ] Helmet, csurf.
 
 - [ ] **Rate Limiting, Anti-DDoS**
 
-    - [ ] Cloudflare, NGINX, iptables.
+  - [ ] Cloudflare, NGINX, iptables.
 
 - [ ] **Zero Trust Architecture**
-    - [ ] Минимально необходимый доступ между сервисами (service-to-service auth).
+  - [ ] Минимально необходимый доступ между сервисами (service-to-service auth).
 
 > **Задача**:
 >
@@ -341,14 +341,14 @@
 
 - [ ] **npm audit, Snyk**
 
-    - [ ] Автоматические проверки зависимостей, регулярные обновления.
+  - [ ] Автоматические проверки зависимостей, регулярные обновления.
 
 - [ ] **TLS/HTTPS**
 
-    - [ ] Шифрование каналов, настройка сертификатов.
+  - [ ] Шифрование каналов, настройка сертификатов.
 
 - [ ] **Side-channel атаки**
-    - [ ] Spectre/Meltdown, общие рекомендации, как Node.js может быть затронут.
+  - [ ] Spectre/Meltdown, общие рекомендации, как Node.js может быть затронут.
 
 > **Задача**:
 >
@@ -361,14 +361,14 @@
 
 - [ ] **Crypto-модуль Node.js**
 
-    - [ ] Шифрование (AES), хэширование (SHA, bcrypt), цифровые подписи (RSA, ECDSA).
+  - [ ] Шифрование (AES), хэширование (SHA, bcrypt), цифровые подписи (RSA, ECDSA).
 
 - [ ] **SSL/TLS**
 
-    - [ ] Самостоятельная генерация ключей и сертификатов (OpenSSL), настройка безопасности.
+  - [ ] Самостоятельная генерация ключей и сертификатов (OpenSSL), настройка безопасности.
 
 - [ ] **PKI**
-    - [ ] Свой мини-CA, выдача и отзыв сертификатов.
+  - [ ] Свой мини-CA, выдача и отзыв сертификатов.
 
 > **Задача**:
 >
