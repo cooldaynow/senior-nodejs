@@ -9,10 +9,10 @@
   - [x] Понимание: AST (Abstract Syntax Tree), JIT-компиляторы (Ignition, TurboFan), оптимизации.
   - [x] Как JS-код превращается в машинный, что даёт возможность повышать производительность.
 
-- [ ] **Garbage Collector в V8**
+- [x] **Garbage Collector в V8**
 
-  - [ ] Типы GC: Mark-and-Sweep, Incremental, Generational, Concurrent.
-  - [ ] “Стоп-мир” (Stop-the-world) фазы, утечки памяти в Node.js и способы их выявить (heapdump, DevTools).
+  - [x] Типы GC: Mark-and-Sweep, Incremental, Generational, Concurrent.
+  - [x] “Стоп-мир” (Stop-the-world) фазы, утечки памяти в Node.js и способы их выявить (heapdump, DevTools).
 
 - [ ] **Libuv и управление потоками**
 
