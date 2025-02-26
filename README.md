@@ -14,10 +14,10 @@
   - [x] Типы GC: Mark-and-Sweep, Incremental, Generational, Concurrent.
   - [x] “Стоп-мир” (Stop-the-world) фазы, утечки памяти в Node.js и способы их выявить (heapdump, DevTools).
 
-- [ ] **Libuv и управление потоками**
+- [x] **Libuv и управление потоками**
 
-  - [ ] Асинхронные I/O операции, Thread Pool для I/O-bound задач.
-  - [ ] Ограничения при CPU-bound нагрузках.
+  - [x] Асинхронные I/O операции, Thread Pool для I/O-bound задач.
+  - [x] Ограничения при CPU-bound нагрузках.
 
 - [x] **Фазы Event Loop**
 
