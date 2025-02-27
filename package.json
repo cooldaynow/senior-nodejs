@@ -18,12 +18,14 @@
   "homepage": "https://github.com/cooldaynow/senior-nodejs#readme",
   "devDependencies": {
     "@types/node": "^22.13.4",
+    "@types/stream-json": "^1.7.8",
     "prettier": "^3.5.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.7.3"
   },
   "dependencies": {
     "@babel/parser": "^7.26.9",
-    "esprima-next": "^6.0.3"
+    "esprima-next": "^6.0.3",
+    "stream-json": "^1.9.1"
   }
 }
