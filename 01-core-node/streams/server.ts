@@ -1,9 +1,10 @@
 import http, { IncomingMessage, RequestListener, ServerResponse } from 'node:http';
-import { pipeline, Transform } from 'node:stream';
+import { pipeline, Transform, Writable } from 'node:stream';
 import fs from 'node:fs';
 import fspromises from 'node:fs/promises';
 import path from 'node:path';
 import StreamArray from 'stream-json/streamers/StreamArray';
+import crypto from 'node:crypto';
 
 const getJSONError = (params: { statusCode: number; message: string }) => JSON.stringify(params);
 
@@ -23,7 +24,71 @@ const checkFileExistOrFail = async (filePath: string, res: ServerResponse<http.I
   }
 };
 
-const uploadFile: RequestListener = (req, res) => {};
+/* 100MB для теста */
+const MAX_UPLOAD_SIZE = 100 * 1024 * 1024;
+const uploadFile: RequestListener = (req, res) => {
+  const fileName = crypto.randomUUID();
+  const filePath = path.join(__dirname, fileName);
+  const writeStream = fs.createWriteStream(filePath);
+  const contentLength = req.headers['content-length'];
+
+  /* Успешная загрузка файла */
+  writeStream.on('finish', () => {
+    res.write('Processing  ...  100% done \n');
+    res.end(`Processing  ...  file (${fileName}) uploaded successfully!`);
+  });
+
+  /* Ошибка при загрузке файла */
+  writeStream.on('error', (error) => {
+    res.end(`Processing   ...   error: ${error.message}`);
+    /* Закрываем клиентский поток после последнего ответа */
+    req.destroy(new Error('Payload too large'));
+    /* Удаляем кривой файл */
+    fs.unlink(filePath, (err) => {
+      if (err) console.error(err);
+    });
+  });
+
+  /* Обработка потока вручную */
+  req.on('data', (chunk) => {
+    const canWrite = writeStream.write(chunk);
+
+    if (!canWrite) {
+      req.pause();
+      // Возобновляем чтение данных
+      writeStream.once('drain', () => req.resume());
+    }
+
+    const { bytesWritten } = writeStream;
+
+    if (bytesWritten > MAX_UPLOAD_SIZE) {
+      /* Закрываем основной поток записи с ошибкой */
+      writeStream.destroy(new Error('File size exceeded 100MB'));
+      return;
+    }
+
+    let progress;
+    if (contentLength) {
+      const total = parseInt(contentLength);
+      const pWritten = ((bytesWritten / total) * 100).toFixed(2);
+      progress = `Processing  ...  ${pWritten}% done \n`;
+    } else {
+      progress = `Processing ... ${Math.round(bytesWritten / 1024 / 1024)}MB uploaded\n`;
+    }
+    res.write(progress);
+  });
+
+  /* Закрываем поток записи */
+  req.on('end', () => {
+    writeStream.end();
+  });
+
+  /* Закрываем поток записи с ошибкой */
+  req.on('error', (err) => {
+    console.error('❌ Ошибка при загрузке:', err);
+    writeStream.destroy(err); // Закрываем поток при ошибке
+  });
+};
 
 const downloadFile = async (params: { fields?: string[] }, req: IncomingMessage, res: ServerResponse) => {
   const { fields = [] } = params;
