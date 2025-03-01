@@ -83,6 +83,7 @@
   - [x] Упрощение работы с асинхронностью, `try/catch` и `.catch()`, глобальные `unhandledRejection`.
 
 - [x] **Проблемы и ограничения**
+
   - [x] Почему промисы нельзя «отменять», когда лучше Worker Threads.
   - [x] Организация тайм-аутов для промисов.
 
@@ -94,25 +95,21 @@
 
 ### **1.5. TypeScript**
 
-- [ ] **Зачем TypeScript**
+- [x] **Зачем TypeScript**
 
-  - [ ] Типобезопасность, автодополнение, упрощение рефакторинга.
+  - [x] Типобезопасность, автодополнение, упрощение рефакторинга.
 
-- [ ] **Основы**
+- [x] **Основы**
 
-  - [ ] Интерфейсы, типы (type), generics, enum.
+  - [x] Интерфейсы, типы (type), generics, enum.
 
-- [ ] **Продвинутая типизация**
+- [x] **Продвинутая типизация**
 
-  - [ ] Conditional Types, Utility Types (Partial, Pick, Omit, Required), Mapped Types.
+  - [x] Conditional Types, Utility Types (Partial, Pick, Omit, Required), Mapped Types.
 
-- [ ] **Интеграция**
-  - [ ] Настройка `tsconfig.json`, декларирование типов (DefinitelyTyped), синхронизация с Node.js API.
+- [x] **Интеграция**
 
-> **Задача**:
->
-> - [ ] Переписать небольшой сервис (CRUD) на TypeScript, обеспечив 100% типизацию.
-> - [ ] Использовать generics и mapped types для гибкой работы с сущностями.
+  - [x] Настройка `tsconfig.json`, декларирование типов (DefinitelyTyped), синхронизация с Node.js API.
 
 ---
 
