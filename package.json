@@ -26,8 +26,13 @@
   },
   "dependencies": {
     "@babel/parser": "^7.26.9",
+    "@fastify/swagger": "^9.4.2",
+    "@fastify/swagger-ui": "^5.2.2",
+    "@sinclair/typebox": "^0.34.28",
     "esprima-next": "^6.0.3",
     "express": "^4.21.2",
+    "fastify": "^5.2.1",
+    "pino-pretty": "^13.0.0",
     "stream-json": "^1.9.1"
   }
 }

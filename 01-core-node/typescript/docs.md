@@ -171,7 +171,7 @@ TypeScript поддерживает **ES Modules** (`import/export`) и **Common
 ### ES Modules
 
 ```typescript
-// user.ts
+// User.ts
 export type User = { name: string };
 
 // app.ts
@@ -181,7 +181,7 @@ import { User } from './user';
 ### CommonJS
 
 ```typescript
-// user.ts
+// User.ts
 export = { name: 'Alice' };
 
 // app.ts
