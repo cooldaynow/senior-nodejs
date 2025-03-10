@@ -1,10 +1,10 @@
-import { Result } from '../types/Result';
+import { FailResult, OkResult, Result } from '../types/Result';
 
-export function ok<T>(value?: T): Result<T, never> {
+export function ok<T>(value?: T): OkResult<T> {
   return { ok: true, value };
 }
 
-export function fail<E>(error: E): Result<never, E> {
+export function fail<E>(error: E): FailResult<E> {
   return { ok: false, error };
 }
 

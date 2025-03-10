@@ -1,12 +1,28 @@
 import Fastify from 'fastify';
-import { User } from './domain/aggregates/User';
 import { UserService } from './domain/services/UserService';
 import { InMemoryUserRepo } from './infrastructure/repositories/InMemoryUserRepo';
-import { type UpdateUserBody, UpdateUserParams, UpdateUserResponse, updateUserSchema } from './shared/schemas';
+import type {
+  CreateUserBody,
+  GetUsersResponse,
+  GetUsersV2Response,
+  UpdateUserBody,
+  UserParams,
+  UserResponse,
+} from './shared/schemas';
+import {
+  createUserSchema,
+  updateUserSchema,
+  deleteUserSchema,
+  getUsersSchema,
+  getUsersSchemaV2,
+} from './shared/schemas';
 import swagger from '@fastify/swagger';
 import swaggerUi from '@fastify/swagger-ui';
 
 const startServer = async () => {
+  const userRepo = new InMemoryUserRepo();
+  const userService = new UserService(userRepo);
+
   try {
     const fastify = Fastify({
       logger: { transport: { target: 'pino-pretty', options: { colorize: true } } },
@@ -39,45 +55,60 @@ const startServer = async () => {
       transformSpecification: (swaggerObject) => swaggerObject,
     });
 
-    const userRepo = new InMemoryUserRepo();
+    /* API V1 */
+    await fastify.register(
+      async (instance, opts) => {
+        /* Получить список пользователей */
+        instance.get<{ Reply: GetUsersResponse }>('/users', { schema: getUsersSchema }, async () => {
+          const users = await userService.getUsers();
+          return { users: users.map((user) => user.toJSON()) };
+        });
 
-    const userService = new UserService(userRepo);
+        /* Создать пользователя */
+        instance.post<{ Body: CreateUserBody; Reply: UserResponse }>(
+          '/users',
+          { schema: createUserSchema },
+          async (request, reply) => {
+            const { body } = request;
+            const user = await userService.createOne(body);
+            return user.toJSON();
+          }
+        );
 
-    /* Получить список пользователей */
-    fastify.get('/users', async () => {
-      const users = await userService.getUsers();
-      return { users: users.map((user) => user.toJSON()) };
-    });
+        /* Удалить пользователя с кодом 204 */
+        instance.delete<{ Params: UserParams }>('/users/:id', { schema: deleteUserSchema }, async (request, reply) => {
+          const { params } = request;
+          const { id } = params;
+          const deletedUser = await userService.deleteOne(id);
+          return deletedUser.toJSON();
+        });
 
-    /* Создать пользователя */
-    fastify.post<{ Body: { email: User['email']; name?: User['name']; sex?: User['sex'] } }>(
-      '/users',
-      async (request, reply) => {
-        const { body } = request;
-        const user = await userService.createOne(body);
-        return user.toJSON();
-      }
+        /* Изменить пользователя частично ( публичные поля ) */
+        instance.patch<{ Params: UserParams; Body: UpdateUserBody; Reply: UserResponse }>(
+          '/users/:id',
+          { schema: updateUserSchema },
+          async (request, reply) => {
+            const { body, params } = request;
+            const { id } = params;
+            const { name, sex } = body;
+            const updUser = await userService.updateOnePublicData({ id, name, sex });
+            return updUser.toJSON();
+          }
+        );
+      },
+      { prefix: '/api/v1/' }
     );
 
-    /* Удалить пользователя с кодом 204 */
-    fastify.delete<{ Params: { id: User['id'] } }>('/users/:id', async (request, reply) => {
-      const { params } = request;
-      const { id } = params;
-      const deletedUser = await userService.deleteOne(id);
-      return deletedUser.toJSON();
-    });
-
-    /* Изменить пользователя частично ( публичные поля ) */
-    fastify.patch<{ Params: UpdateUserParams; Body: UpdateUserBody; Reply: UpdateUserResponse }>(
-      '/users/:id',
-      { schema: updateUserSchema },
-      async (request, reply) => {
-        const { body, params } = request;
-        const { id } = params;
-        const { name, sex } = body;
-        const updUser = await userService.updateOnePublicData({ id, name, sex });
-        return updUser.toJSON();
-      }
+    /* API V2 */
+    await fastify.register(
+      async (instance, opts) => {
+        /* Получить список пользователей V2 */
+        instance.get<{ Reply: GetUsersV2Response }>('/users', { schema: getUsersSchemaV2 }, async () => {
+          const users = await userService.getUsers();
+          return { users: users.map((user) => user.toJSON()) };
+        });
+      },
+      { prefix: '/api/v2/' }
     );
 
     await fastify.listen({ port: 3000, host: '127.0.0.1' });

@@ -1,9 +1,8 @@
 import { UserRepository } from '../../domain/repositories/UserRepository';
 import { DBUser } from '../../domain/aggregates/User';
 import { Maybe } from '../../shared/types';
-import { Result } from '../../shared/types/Result';
-import { UserExistError, UserNotFoundError } from '../../domain/errors';
-import { fail, ok } from '../../shared/utils';
+import { OkResult } from '../../shared/types/Result';
+import { ok } from '../../shared/utils';
 
 export class InMemoryUserRepo implements UserRepository {
   private static readonly usersMap = new Map<string, DBUser>();
@@ -20,14 +19,13 @@ export class InMemoryUserRepo implements UserRepository {
     return Array.from(InMemoryUserRepo.usersMap.values()).find((user) => user.email === email) ?? null;
   }
 
-  async saveOne(user: DBUser): Promise<Result<void, UserExistError>> {
-    if (InMemoryUserRepo.usersMap.has(user.id)) return fail(new UserExistError(user.email));
+  // Для примера, можно возвращать fail, если в БД не получилось сохранить
+  async saveOne(user: DBUser): Promise<OkResult> {
     InMemoryUserRepo.usersMap.set(user.id, user);
     return ok();
   }
 
-  async updateOne(user: DBUser): Promise<Result<void, UserNotFoundError>> {
-    if (!InMemoryUserRepo.usersMap.has(user.id)) return fail(new UserNotFoundError(user.id));
+  async updateOne(user: DBUser): Promise<OkResult> {
     InMemoryUserRepo.usersMap.set(user.id, user);
     return ok();
   }

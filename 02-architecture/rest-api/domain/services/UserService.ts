@@ -6,8 +6,6 @@ import { unwrap } from '../../shared/utils';
 export class UserService {
   constructor(private userRepo: UserRepository) {}
 
-  private findUserPredicate = (email: string) => (user: User) => user.email === email;
-
   /* Получить всех пользователей */
   getUsers = async () => {
     const users = await this.userRepo.findAll();
@@ -23,8 +21,12 @@ export class UserService {
 
   /* Создать пользователя */
   createOne = async (payload: { email: User['email']; name?: User['name']; sex?: User['sex'] }) => {
-    const user = User.create(payload);
+    const { email } = payload;
+    const isUserExist = await this.userRepo.findByEmail(email);
+    if (isUserExist) throw new UserExistError(email);
+
     /* Сохраняем пользователя в БД, проверяем ошибки */
+    const user = User.create(payload);
     unwrap(await this.userRepo.saveOne(user.toDBJSON()));
     return user;
   };
